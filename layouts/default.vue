@@ -8,14 +8,10 @@
       <Closed />
     </button>
     <nav class="Header-nav">
-      <RouterLink
-        v-for="nav in headerNav"
-        :to="nav.href"
-        :aria-label="nav.title"
-      >
+      <NuxtLink v-for="nav in headerNav" :to="nav.href" :aria-label="nav.title">
         <component :is="nav.icon" />
         <span v-show="!closeButton">{{ nav.title }}</span>
-      </RouterLink>
+      </NuxtLink>
     </nav>
   </header>
   <main class="Main"><slot /><Toaster class="Toaster" theme="dark" /></main>

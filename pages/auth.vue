@@ -3,8 +3,13 @@
     <h1>Bienvenido</h1>
     <form class="Form" novalidate @submit="handleSubmit">
       <div class="Form-input">
-        <label for="email">Correo</label>
-        <input type="email" name="email" id="email" v-model="email" />
+        <label for="username">Username</label>
+        <input
+          type="username"
+          name="username"
+          id="username"
+          v-model="username"
+        />
       </div>
       <div class="Form-input">
         <label for="password">Password</label>
@@ -23,18 +28,47 @@
 <script setup lang="ts">
 definePageMeta({ layout: "non-protect" });
 import { computed, ref, type ComputedRef, type Ref } from "vue";
+import { toast } from "vue-sonner";
+import { useRouter } from "vue-router";
+import { LoginUrl } from "~/config/api";
 
-const email: Ref<string> = ref("");
+const router = useRouter();
+
+const username: Ref<string> = ref("");
 const password: Ref<string> = ref("");
 const disabled: ComputedRef<boolean> = computed(
-  () => !Boolean(email.value.length) || !Boolean(password.value.length)
+  () => !Boolean(username.value.length) || !Boolean(password.value.length)
 );
 
-const handleSubmit = (e: any) => {
+const handleSubmit = async (e: any) => {
   e.preventDefault();
 
-  console.log(email.value);
-  console.log(password.value);
+  const body = {
+    username: username.value,
+    password: password.value,
+  };
+
+  username.value = "";
+  password.value = "";
+
+  toast.promise(
+    fetch(LoginUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    }),
+    {
+      loading: "Cargando...",
+      success: (data) => {
+        data.json().then((json) => {
+          localStorage.setItem("token", json.token);
+        });
+        router.push("/");
+        return "Bienvenido Administrador!";
+      },
+      error: (_) => "Credenciales Incorrectas!",
+    }
+  );
 };
 </script>
 
@@ -65,9 +99,12 @@ section
         color: $color-1
         font-size: 1.2rem
       input
-        padding: .3rem .5rem
+        padding: .3rem .8rem
         width: calc( 100% - 1rem )
-        border: 0
+        border: none
+        outline: none
+        border-radius: 20px
+        font-size: 1.1rem
     input[type="submit"]
       background-color: $accent-2
       border: none
