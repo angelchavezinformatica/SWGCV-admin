@@ -61,7 +61,6 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ middleware: "auth" });
 useHead({ title: "Inventario | Vivero La Huerta" });
 
 import { useInventoryIndex } from "~/composables/pages/inventory";

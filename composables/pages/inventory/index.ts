@@ -1,18 +1,15 @@
 import { computed, ref, watch, type ComputedRef, type Ref } from "vue";
-import { AllInventory } from "~/config/api";
-import type { All, Category, Product } from "~/interfaces/inventory";
-import { useFetchJSON } from "~/services/api";
+import type { Category, Product } from "~/interfaces/inventory";
 
 export const useInventoryIndex = () => {
-  const allProducts: Ref<Product[]> = ref([]);
-  const allCategories: Ref<Category[]> = ref([]);
+  const { allCategories, allProducts } = useInventoryStore();
   const category: Ref<string> = ref("all");
   const subcategory: Ref<string> = ref("all");
   const search: Ref<string> = ref("");
 
   const subCategories: ComputedRef<string[]> = computed(() => {
     if (category.value === "all") return [];
-    const cat: Category | undefined = allCategories.value.find(
+    const cat: Category | undefined = allCategories.find(
       (c) => c.category === category.value
     );
     if (!cat) return [];
@@ -21,16 +18,16 @@ export const useInventoryIndex = () => {
 
   const products: ComputedRef<Product[]> = computed(() => {
     if (search.value === "") {
-      if (category.value === "all") return allProducts.value;
+      if (category.value === "all") return allProducts;
       if (subcategory.value === "all")
-        return allProducts.value.filter(
+        return allProducts.filter(
           (product) => product.category === category.value
         );
-      return allProducts.value.filter(
+      return allProducts.filter(
         (product) => product.subcategory === subcategory.value
       );
     }
-    return allProducts.value.filter(
+    return allProducts.filter(
       (product) =>
         product.name.toLowerCase().indexOf(search.value.toLowerCase()) > -1
     );
@@ -38,13 +35,6 @@ export const useInventoryIndex = () => {
 
   watch(category, () => {
     if (category.value == "all") subcategory.value = "all";
-  });
-
-  onMounted(async () => {
-    const { getJSON } = await useFetchJSON(AllInventory);
-    const json = await getJSON<All>();
-    allProducts.value = json.products;
-    allCategories.value = json.categories;
   });
 
   return {

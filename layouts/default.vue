@@ -41,6 +41,16 @@ const { state: closeButton, setState } = useLocalStorage<boolean>(
   false,
   "closeNav"
 );
+
+const auth = await useAuth();
+
+if (auth) {
+  const inventory = useInventoryStore();
+  await callOnce(inventory.fetch);
+} else if (auth === false) {
+  const router = useRouter();
+  router.push("/auth");
+}
 </script>
 
 <style scope lang="sass">

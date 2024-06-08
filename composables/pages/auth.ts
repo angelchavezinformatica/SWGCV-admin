@@ -1,11 +1,8 @@
 import { computed, ref, type ComputedRef, type Ref } from "vue";
 import { toast } from "vue-sonner";
-import { useRouter } from "vue-router";
 import { LoginUrl } from "~/config/api";
 
 export const useAuthPage = () => {
-  const router = useRouter();
-
   const username: Ref<string> = ref("");
   const password: Ref<string> = ref("");
   const disabled: ComputedRef<boolean> = computed(
@@ -35,7 +32,7 @@ export const useAuthPage = () => {
           data.json().then((json) => {
             localStorage.setItem("token", json.token);
           });
-          router.push("/");
+          window.location.href = "/";
           return "Bienvenido Administrador!";
         },
         error: (_) => "Credenciales Incorrectas!",
