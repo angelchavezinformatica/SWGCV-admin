@@ -1,7 +1,10 @@
-$bg-color: #FFFFFF
+$bg-color: #F5F9F4
 $accent-1: #272727
 $accent-2: #444444
 $color-1: #ffffff
+$color-2: #000000
+$color-3: #326334
+$color-4: #F5F9F4
 
 @mixin flex-stretch-evenly()
     display: flex
@@ -39,3 +42,11 @@ $color-1: #ffffff
 @mixin flex--center()
     display: flex
     justify-content: center
+
+@mixin flex--between()
+    display: flex
+    justify-content: space-between
+
+@mixin flex--evenly()
+    display: flex
+    justify-content: space-evenly

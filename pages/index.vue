@@ -1,23 +1,26 @@
 <template>
-  <section>
-    <h1>Hola Mundo</h1>
-    <h2>Colaboradores</h2>
-    <ol>
-      <li v-for="collaborator in collaborators">
-        <a
-          :href="collaborator.github"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ collaborator.name }} ({{ collaborator.username }})
-        </a>
-      </li>
-    </ol>
-  </section>
+  <Main>
+    <section>
+      <h1>Colaboradores</h1>
+      <ol>
+        <li v-for="collaborator in collaborators">
+          <a
+            :href="collaborator.github"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ collaborator.name }} ({{ collaborator.username }})
+          </a>
+        </li>
+      </ol>
+    </section>
+  </Main>
 </template>
 
 <script setup lang="ts">
 definePageMeta({ middleware: "auth" });
+useHead({ title: "Vivero La Huerta" });
+
 const collaborators = [
   {
     name: "Angel Chávez",
@@ -30,7 +33,7 @@ const collaborators = [
     github: "https://github.com/Bhowa",
   },
   {
-    name: "Marlene Costa",
+    name: "Dayanara Costa",
     username: "dayanaraC",
     github: "https://github.com/dayanaraC",
   },
@@ -40,7 +43,7 @@ const collaborators = [
     github: "https://github.com/KaterineDev",
   },
   {
-    name: "Miguel Sánchez",
+    name: "Félix Sánchez",
     username: "SanchezIng",
     github: "https://github.com/SanchezIng",
   },

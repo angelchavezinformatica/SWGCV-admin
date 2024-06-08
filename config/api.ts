@@ -3,3 +3,5 @@ const baseAPI: string = baseURL + "api/";
 
 export const LoginUrl: string = baseAPI + "auth/login";
 export const AuthUrl: string = baseAPI + "auth/auth";
+
+export const AllInventory: string = baseAPI + "inventory/all";

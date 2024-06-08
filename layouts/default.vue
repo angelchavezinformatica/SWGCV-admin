@@ -14,28 +14,27 @@
       </NuxtLink>
     </nav>
   </header>
-  <main class="Main"><slot /><Toaster class="Toaster" theme="dark" /></main>
+  <slot />
 </template>
 
 <script setup lang="ts">
-import { Toaster } from "vue-sonner";
-import Backup from "~/components/icon/backup.vue";
-import Client from "~/components/icon/client.vue";
+// import Backup from "~/components/icon/backup.vue";
+// import Client from "~/components/icon/client.vue";
 import Closed from "~/components/icon/closed.vue";
 import Inventory from "~/components/icon/inventory.vue";
-import ShoppingCart from "~/components/icon/shopping-cart.vue";
-import Supplier from "~/components/icon/supplier.vue";
-import Worker from "~/components/icon/worker.vue";
+// import ShoppingCart from "~/components/icon/shopping-cart.vue";
+// import Supplier from "~/components/icon/supplier.vue";
+// import Worker from "~/components/icon/worker.vue";
 
 import { useLocalStorage } from "~/composables/localStorage";
 
 const headerNav = [
   { title: "Inventario", icon: Inventory, href: "/inventory" },
-  { title: "Ventas", icon: ShoppingCart, href: "/sales" },
-  { title: "Clientes", icon: Client, href: "/clients" },
-  { title: "Proveedores", icon: Supplier, href: "/suppliers" },
-  { title: "Empleados", icon: Worker, href: "/workers" },
-  { title: "Backups", icon: Backup, href: "/backups" },
+  // { title: "Ventas", icon: ShoppingCart, href: "/sales" },
+  // { title: "Clientes", icon: Client, href: "/clients" },
+  // { title: "Proveedores", icon: Supplier, href: "/suppliers" },
+  // { title: "Empleados", icon: Worker, href: "/workers" },
+  // { title: "Backups", icon: Backup, href: "/backups" },
 ];
 
 const { state: closeButton, setState } = useLocalStorage<boolean>(
@@ -62,6 +61,7 @@ const { state: closeButton, setState } = useLocalStorage<boolean>(
     border: none
     width: 30px
     height: 30px
+    cursor: pointer
     svg
       fill: $color-1
   .Header-closebutton:active
@@ -71,6 +71,7 @@ const { state: closeButton, setState } = useLocalStorage<boolean>(
     flex-direction: column
     width: 100%
     a
+      @include flex-center-()
       width: 100%
       height: 40px
       text-decoration: none
