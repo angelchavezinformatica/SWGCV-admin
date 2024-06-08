@@ -34,7 +34,9 @@ export const useInventoryIndex = () => {
   });
 
   watch(category, () => {
-    if (category.value == "all") subcategory.value = "all";
+    if (category.value === "all") subcategory.value = "all";
+    else if (!subCategories.value.find((s) => s === subcategory.value))
+      subcategory.value = "all";
   });
 
   return {

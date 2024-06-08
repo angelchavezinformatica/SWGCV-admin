@@ -3,6 +3,7 @@
     <button
       class="Header-closebutton"
       type="button"
+      :title="`${closeButton ? 'Abrir' : 'Cerrar'} menú`"
       @click="() => setState(!closeButton)"
     >
       <Closed />
