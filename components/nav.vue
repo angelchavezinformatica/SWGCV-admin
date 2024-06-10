@@ -12,10 +12,14 @@
 
 <script setup lang="ts">
 interface Props {
-  title: string;
-  tabs: { to: string; title: string }[];
+  tabs: { to: string; title: string; name: string }[];
 }
-defineProps<Props>();
+const props = defineProps<Props>();
+const route = useRoute();
+
+const title =
+  props.tabs.find((tab) => tab.name === route.name?.toString())?.title ||
+  "Page name not found";
 </script>
 
 <style scope lang="sass">
