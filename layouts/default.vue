@@ -15,7 +15,9 @@
       </NuxtLink>
     </nav>
   </header>
-  <slot />
+  <main class="Main">
+    <slot />
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -23,8 +25,8 @@
 // import Client from "~/components/icon/client.vue";
 import Closed from "~/components/icon/closed.vue";
 import Inventory from "~/components/icon/inventory.vue";
+import Provider from "~/components/icon/provider.vue";
 // import ShoppingCart from "~/components/icon/shopping-cart.vue";
-// import Supplier from "~/components/icon/supplier.vue";
 // import Worker from "~/components/icon/worker.vue";
 
 import { useLocalStorage } from "~/composables/localStorage";
@@ -33,7 +35,7 @@ const headerNav = [
   { title: "Inventario", icon: Inventory, href: "/inventory" },
   // { title: "Ventas", icon: ShoppingCart, href: "/sales" },
   // { title: "Clientes", icon: Client, href: "/clients" },
-  // { title: "Proveedores", icon: Supplier, href: "/suppliers" },
+  { title: "Proveedores", icon: Provider, href: "/provider" },
   // { title: "Empleados", icon: Worker, href: "/workers" },
   // { title: "Backups", icon: Backup, href: "/backups" },
 ];
@@ -47,7 +49,9 @@ const auth = await useAuth();
 
 if (auth) {
   const inventory = useInventoryStore();
+  const provider = useProviderStore();
   await callOnce(inventory.fetch);
+  await callOnce(provider.fetch);
 } else if (auth === false) {
   const router = useRouter();
   router.push("/auth");
@@ -81,6 +85,7 @@ if (auth) {
     @include flex-center-center()
     flex-direction: column
     width: 100%
+    gap: 1rem
     a
       @include flex-center-()
       width: 100%

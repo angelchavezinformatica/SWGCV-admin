@@ -1,24 +1,27 @@
 <template>
-  <section class="Navigation">
+  <div class="Navigation">
     <nav class="Navigation-nav">
       <NuxtLink to="/">Inicio</NuxtLink>
-      <NuxtLink v-for="tab in tabs" :to="`/inventory${tab.to}`">
+      <NuxtLink v-for="tab in tabs" :to="`/${prev}${tab.to}`">
         {{ tab.title }}
       </NuxtLink>
     </nav>
     <h1 class="Navigation-title">{{ title }}</h1>
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
 interface Props {
   tabs: { to: string; title: string; name: string }[];
+  prev: string;
+  notFound?: string;
 }
 const props = defineProps<Props>();
 const route = useRoute();
 
 const title =
   props.tabs.find((tab) => tab.name === route.name?.toString())?.title ||
+  props.notFound ||
   "Page name not found";
 </script>
 

@@ -1,20 +1,18 @@
 <template>
-  <Main>
-    <section>
-      <h1>Colaboradores</h1>
-      <ol>
-        <li v-for="collaborator in collaborators">
-          <a
-            :href="collaborator.github"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ collaborator.name }} ({{ collaborator.username }})
-          </a>
-        </li>
-      </ol>
-    </section>
-  </Main>
+  <section>
+    <h1>Colaboradores</h1>
+    <ol>
+      <li v-for="collaborator in collaborators">
+        <a
+          :href="collaborator.github"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ collaborator.name }} ({{ collaborator.username }})
+        </a>
+      </li>
+    </ol>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -48,5 +46,3 @@ const collaborators = [
   },
 ];
 </script>
-
-<style scope lang="sass"></style>

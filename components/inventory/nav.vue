@@ -1,5 +1,5 @@
 <template>
-  <Nav :tabs="tabs" />
+  <Nav :tabs="tabs" prev="inventory" />
 </template>
 
 <script setup lang="ts">

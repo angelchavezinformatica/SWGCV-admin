@@ -1,5 +1,5 @@
 <template>
-  <form class="Form" novalidate @submit.prevent="$emit('s', $event)">
+  <form class="Form" novalidate @submit.prevent="$emit('s')">
     <slot />
     <div class="Form-input">
       <button class="Form-input-button" @click="$emit('r')">

@@ -7,8 +7,10 @@ export const useInventoryStore = defineStore("inventory", () => {
   const allProducts: Ref<Product[]> = ref([]);
   const allCategories: Ref<Category[]> = ref([]);
 
+  const { request } = useFetchJSON();
+
   const fetch = async () => {
-    const { getJSON } = await useFetchJSON(AllInventory);
+    const { getJSON } = await request(AllInventory);
     const json = await getJSON<All>();
     allProducts.value = json.products;
     allCategories.value = json.categories;

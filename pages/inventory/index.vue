@@ -1,7 +1,7 @@
 <template>
-  <Main>
+  <section>
     <InventoryNav />
-    <section class="Filter">
+    <article class="Filter">
       <div class="Filter-search">
         <input type="text" v-model="search" placeholder="Buscar..." />
       </div>
@@ -26,8 +26,8 @@
           </option>
         </select>
       </div>
-    </section>
-    <section class="Products">
+    </article>
+    <article class="Products">
       <div class="Products-product" v-for="product in products">
         <img :src="product.image" :alt="product.name" />
         <div class="Products-product-content">
@@ -56,8 +56,8 @@
           </details>
         </div>
       </div>
-    </section>
-  </Main>
+    </article>
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -118,26 +118,26 @@ const {
         gap: .3rem
         span
           cursor: pointer
-          color: $color-4
-          border: 1px solid $color-4
+          color: $bg-color
+          border: 1px solid $bg-color
           font-size: .9rem
           padding: .2rem .5rem
           text-align: center
           border-radius: 30px
       .Products-product-title
         font-size: 1.2rem
-        color: $color-4
+        color: $bg-color
         text-align: center
       .Products-product-available
         font-size: .95rem
         margin: .2rem 0
-        color: $color-4
+        color: $bg-color
         text-align: center
         span
           font-weight: 700
       .Products-product-details
         margin-top: .5rem
-        color: $color-4
+        color: $bg-color
         text-align: center
         summary
           cursor: pointer
