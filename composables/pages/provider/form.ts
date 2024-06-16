@@ -40,19 +40,23 @@ export const useProviderForm = (props: Props) => {
   };
 
   const handleSubmit = async () => {
-    const response = await request(AllProvider, {
-      method: "PATCH",
-      body: { id: id.value, name: name.value, phone_number: phoneNumber.value },
+    const body = {
+      id: id.value,
+      name: name.value,
+      phone_number: phoneNumber.value,
+    };
+    name.value = "";
+
+    toast.promise(request(AllProvider, { method: "PATCH", body }), {
+      loading: "Cargando...",
+      success: () => {
+        fetch().then(() => {
+          router.push("/provider");
+        });
+        return "Se actualizaron exitosamente";
+      },
+      error: () => "Ha ocurrido un error, intentelo más tarde",
     });
-
-    if (!response.ok) {
-      toast.error("Ha ocurrido un error, intentelo más tarde");
-      return;
-    }
-
-    await fetch();
-    router.push("/provider");
-    toast.success("Se actualizaron los datos del proveedor exitosamente");
   };
 
   return {
