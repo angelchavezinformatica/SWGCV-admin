@@ -4,7 +4,7 @@
     <div v-for="provider in allProviders" class="Providers">
       <p>{{ provider.name }} ({{ provider.phone_number }})</p>
       <NuxtLink
-        :to="`/provider/${provider.id}`"
+        :to="`/provider/update/${provider.id}`"
         :aria-label="`Editar proveedor ${provider.id}`"
       >
         <IconPencil />

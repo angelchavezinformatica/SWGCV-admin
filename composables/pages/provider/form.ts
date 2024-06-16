@@ -19,6 +19,7 @@ export const useProviderForm = (props: Props) => {
   const phoneNumber: Ref<string> = ref(props.phoneNumber || "");
 
   const phoneNumberError: ComputedRef<string | null> = computed(() => {
+    if (phoneNumber.value.length === 0) return null;
     if (!/^\d+$/.test(phoneNumber.value)) return "Debe contener solo números";
     if (phoneNumber.value.length !== 0 && phoneNumber.value.length !== 9)
       return "El número de teléfono debe tener 9 números";
@@ -40,20 +41,23 @@ export const useProviderForm = (props: Props) => {
   };
 
   const handleSubmit = async () => {
-    const body = {
-      id: id.value,
+    let body: { id?: number; name: string; phone_number: string } = {
       name: name.value,
       phone_number: phoneNumber.value,
     };
-    name.value = "";
+    if (id.value !== undefined) body = { id: id.value, ...body };
+    handleReset();
+    const method: "PATCH" | "POST" = id.value !== undefined ? "PATCH" : "POST";
 
-    toast.promise(request(AllProvider, { method: "PATCH", body }), {
+    toast.promise(request(AllProvider, { method, body }), {
       loading: "Cargando...",
       success: () => {
         fetch().then(() => {
           router.push("/provider");
         });
-        return "Se actualizaron exitosamente";
+        return id.value !== undefined
+          ? "Se actualizó los datos del proveedor exitosamente"
+          : "Se creó el proveedor exitosamente";
       },
       error: () => "Ha ocurrido un error, intentelo más tarde",
     });
