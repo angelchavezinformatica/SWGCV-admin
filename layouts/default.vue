@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 // import Backup from "~/components/icon/backup.vue";
-// import Client from "~/components/icon/client.vue";
+import Client from "~/components/icon/client.vue";
 import Closed from "~/components/icon/closed.vue";
 import Inventory from "~/components/icon/inventory.vue";
 import Provider from "~/components/icon/provider.vue";
@@ -34,7 +34,7 @@ import { useLocalStorage } from "~/composables/localStorage";
 const headerNav = [
   { title: "Inventario", icon: Inventory, href: "/inventory" },
   // { title: "Ventas", icon: ShoppingCart, href: "/sales" },
-  // { title: "Clientes", icon: Client, href: "/clients" },
+  { title: "Clientes", icon: Client, href: "/client" },
   { title: "Proveedores", icon: Provider, href: "/provider" },
   // { title: "Empleados", icon: Worker, href: "/workers" },
   // { title: "Backups", icon: Backup, href: "/backups" },

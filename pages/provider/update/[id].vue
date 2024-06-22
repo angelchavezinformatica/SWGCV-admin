@@ -10,6 +10,7 @@
 </template>
 
 <script setup lang="ts">
+useHead({ title: "Actualizar Proveedor | Proveedores | Vivero La Huerta" });
 const { allProviders } = useProviderStore();
 const route = useRoute();
 const router = useRouter();
