@@ -46,7 +46,7 @@
           </div>
           <h2 class="Products-product-title">{{ product.name }}</h2>
           <p class="Products-product-available">
-            <span>{{ product.quantity }}</span> disponibles (<span
+            <span>{{ product.stock }}</span> disponibles (<span
               >S/. {{ product.price }}</span
             >)
           </p>

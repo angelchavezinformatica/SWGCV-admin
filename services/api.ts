@@ -9,10 +9,10 @@ interface More {
   body?: any;
 }
 
-export const useFetchJSON = () => {
+export const usePFetch = () => {
   const router = useRouter();
 
-  const request = async (url: string, more?: More) => {
+  const requestP = async (url: string, more?: More) => {
     const token: string | null = localStorage.getItem("token");
 
     if (!token) router.push("/auth");
@@ -21,14 +21,32 @@ export const useFetchJSON = () => {
       method: more?.method,
       headers: {
         Authorization: `Token ${token}`,
+        ...more?.headers,
+      },
+      body: more?.body,
+    });
+
+    if (more?.protected !== false && response.status === 401)
+      router.push("/auth");
+
+    return { ok: response.ok, headers: response.headers, response };
+  };
+
+  return { requestP };
+};
+
+export const useFetchJSON = () => {
+  const { requestP } = usePFetch();
+
+  const request = async (url: string, more: More) => {
+    const { response } = await requestP(url, {
+      method: more?.method,
+      headers: {
         "Content-Type": "application/json",
         ...more?.headers,
       },
       body: JSON.stringify(more?.body),
     });
-
-    if (more?.protected !== false && response.status === 401)
-      router.push("/auth");
 
     const getJSON = async <T>() => (await response.json()) as T;
 

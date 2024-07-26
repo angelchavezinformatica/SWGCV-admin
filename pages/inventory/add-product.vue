@@ -21,11 +21,11 @@
         v-model="description"
       />
       <FormInput
-        id="quantity"
+        id="stock"
         label="Cantidad:"
         type="number"
-        v-model="quantity"
-        :error="quantityError"
+        v-model="stock"
+        :error="stockError"
       />
       <FormInput
         id="price"
@@ -69,8 +69,8 @@ const {
   nameError,
   price,
   priceError,
-  quantity,
-  quantityError,
+  stock,
+  stockError,
   subcategory,
 } = useInventoryAddProduct();
 </script>
